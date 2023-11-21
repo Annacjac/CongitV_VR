@@ -30,10 +30,10 @@ public class SpeechTimer : MonoBehaviour
         else{
             currentTime = 0;
             timerText.text = "";
-        }   
+        }
     }
 
-    public void toggleTimer(){
+    public void ToggleTimer(){
         if(!speechDone && !isOn){
             isOn = true;
             speechDone = true;

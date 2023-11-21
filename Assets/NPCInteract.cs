@@ -31,6 +31,7 @@ public class NPCInteract : MonoBehaviour
     }
 
     private void Update(){
+        
     }  
 
     public void PlayerInitiates(){
@@ -47,10 +48,12 @@ public class NPCInteract : MonoBehaviour
 
     public void Dialog(){
         if(interactionMode == 0){
-            if(interactionStage == 1)
+            if(interactionStage == 1){
                 interactText.text = "Player is introducing themselves to NPC. Interact with NPC again for a response.";
-            else if(interactionStage == 2)
+            }
+            else if(interactionStage == 2){
                 interactText.text = "NPC: Nice to meet you. The meeting is about to start!";
+            }
             else{
                 interactText.text = "";
                 interactionStage = 0;
@@ -59,10 +62,12 @@ public class NPCInteract : MonoBehaviour
             Debug.Log(interactText.text);
         }
         else{
-            if(interactionStage == 1)
+            if(interactionStage == 1){
                 interactText.text = "NPC: Hey, what did you think about that new HR policy?";
-            else if(interactionStage == 2)
+            }
+            else if(interactionStage == 2){
                 interactText.text = "Player shares their opinion.";
+            }
             else{
                 interactText.text = "Hm, okay, interesting. I don't think I agree with that, but to each their own. See you later!";
                 interactionStage = 0;
