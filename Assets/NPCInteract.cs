@@ -4,34 +4,49 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.Scripting.APIUpdating;
+using System.Threading;
+using Unity.VisualScripting;
 
 public class NPCInteract : MonoBehaviour
 {
     [Header("Component")]
     public TextMeshProUGUI interactText;
     public NavMeshAgent navMeshAgent;
+    public Transform player;
+    public Transform agent;
+    Vector3 destination;
+    Animator anim;
+
 
     [Header("Interaction Settings")]
     public bool playerInteractionDone = false;
     public int interactionStage = 0;
-    public bool nPCInteractionDone = false;
-    public float rotateTime = 2; 
-    public float walkSpeed = 4;
-    Vector3 playerLastPosition = Vector3.zero;
-    Vector3 m_PlayerPosition;
+    public bool npcInteractionStarted = false;
+    bool nPCInteractionDone = false;
+    public int interactionMode = 0; //0 is player initiates interaction, 1 is NPC initiates interaction.
+    public AnimateCharacter animate;
 
-    //0 is player initiates interaction, 1 is NPC initiates interaction.
-    public int interactionMode = 0; 
     
     private void Start(){
-        m_PlayerPosition = Vector3.zero;
-
-        //NavMeshAgent.isStopped = true;
-        //NavMeshAgent.speed = 0;
     }
 
     private void Update(){
-        
+        if(npcInteractionStarted && playerInteractionDone){
+            NPCInitiates();
+            npcInteractionStarted = false;
+        }
+
+        if (!navMeshAgent.pathPending){
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            {
+                if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
+                {
+                    Dialog();
+                }
+            }
+        }
+
     }  
 
     public void PlayerInitiates(){
@@ -40,64 +55,54 @@ public class NPCInteract : MonoBehaviour
     }
 
     public void NPCInitiates(){
-        //WalkToPlayer();
-        //Stop();
+        destination = player.position;
+        destination.z += 0.75f;
+        WalkToPlayer(destination);
         interactionStage++;
-        Dialog();
     }
 
     public void Dialog(){
-        if(interactionMode == 0){
+        if(interactionMode == 0 && !playerInteractionDone){
             if(interactionStage == 1){
                 interactText.text = "Player is introducing themselves to NPC. Interact with NPC again for a response.";
             }
             else if(interactionStage == 2){
                 interactText.text = "NPC: Nice to meet you. The meeting is about to start!";
             }
-            else{
+            else if(interactionStage == 3){
                 interactText.text = "";
                 interactionStage = 0;
                 playerInteractionDone = true;
             }
-            Debug.Log(interactText.text);
+            //Debug.Log(interactText.text);
         }
-        else{
+        else if(interactionMode == 1 && !nPCInteractionDone && playerInteractionDone){
             if(interactionStage == 1){
                 interactText.text = "NPC: Hey, what did you think about that new HR policy?";
             }
             else if(interactionStage == 2){
                 interactText.text = "Player shares their opinion.";
             }
-            else{
+            else if(interactionStage == 3){
                 interactText.text = "Hm, okay, interesting. I don't think I agree with that, but to each their own. See you later!";
-                interactionStage = 0;
             }
-            Debug.Log(interactText.text);
+            else if(interactionStage == 4){
+                interactText.text = "";
+                interactionStage = 0;
+                nPCInteractionDone = true;
+            }
+            //Debug.Log(interactText.text);
         }
+        Debug.Log(interactionStage.ToString());
+
     }
 
-    public void ChooseInteractMode(){
-        if(interactionMode == 0){
-            PlayerInitiates();
-        }
-        else{
-            NPCInitiates();
-        }
+    public void WalkToPlayer(Vector3 destination){
+        navMeshAgent.SetDestination(destination);
     }
 
-    /*void Move(float speed){
-        navMeshAgent.isStopped = false;
-        navMeshAgent.speed = speed;
+    public IEnumerator Wait(){
+        yield return new WaitForSeconds(10);
     }
-
-    void Stop(){
-        navMeshAgent.isStopped = true;
-        navMeshAgent.speed = 0;
-    }
-
-    void WalkToPlayer(){
-        playerLastPosition = Vector3.zero;
-        Move(walkSpeed);
-        navMeshAgent.destination = m_PlayerPosition;
-    }*/
+    
 }
