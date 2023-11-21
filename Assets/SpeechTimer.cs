@@ -7,10 +7,12 @@ public class SpeechTimer : MonoBehaviour
 {
     [Header("Component")]
     public TextMeshProUGUI timerText;
+    public NPCInteract npcInteract;
 
     [Header ("Timer Settings")]
     public bool isOn = false;
     public float currentTime;
+    public bool speechStarted;
     public bool speechDone;
 
     // Start is called before the first frame update
@@ -25,7 +27,6 @@ public class SpeechTimer : MonoBehaviour
         if(isOn){
             currentTime += Time.deltaTime;
             timerText.text = "Speech Duration: " + currentTime.ToString();
-            speechDone = true;
         }
         else{
             currentTime = 0;
@@ -34,12 +35,15 @@ public class SpeechTimer : MonoBehaviour
     }
 
     public void ToggleTimer(){
-        if(!speechDone && !isOn){
+        if(!speechDone && !isOn && npcInteract.playerInteractionDone){
             isOn = true;
             speechDone = true;
         }
         else if(isOn){
             isOn = false;
+            npcInteract.interactionMode = 1;
+            npcInteract.interactionStage = 0;
+            npcInteract.npcInteractionStarted = true;
         }
     }
 }
