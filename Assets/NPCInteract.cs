@@ -90,11 +90,19 @@ public class NPCInteract : MonoBehaviour
                 interactText.text = "";
                 interactionStage = 0;
                 nPCInteractionDone = true;
+                //Debug.Log("End Game");
+                EndGame();
+
             }
             //Debug.Log(interactText.text);
         }
         Debug.Log(interactionStage.ToString());
 
+    }
+
+    public void EndGame(){
+        Debug.Log("End game");
+        SceneTransitionManager.singleton.GoToSceneAsync(3);
     }
 
     public void WalkToPlayer(Vector3 destination){
