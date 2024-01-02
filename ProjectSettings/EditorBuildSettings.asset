@@ -18,6 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Exit Scene.unity
     guid: f63c398fda4d94405942c9bda1fe850c
   m_configObjects:
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 9a364efb471a69e40bf857375ac01048,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: d129b9e42299343488260dbb803b655d,
       type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: b7fe550be524d4b48ad6054c6958f6ad,

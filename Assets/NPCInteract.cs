@@ -29,6 +29,7 @@ public class NPCInteract : MonoBehaviour
 
     
     private void Start(){
+    
     }
 
     private void Update(){
@@ -96,7 +97,6 @@ public class NPCInteract : MonoBehaviour
             }
             //Debug.Log(interactText.text);
         }
-        Debug.Log(interactionStage.ToString());
 
     }
 
