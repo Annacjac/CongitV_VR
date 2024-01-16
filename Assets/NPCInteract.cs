@@ -8,6 +8,7 @@ using UnityEngine.Scripting.APIUpdating;
 using System.Threading;
 using Unity.VisualScripting;
 
+[RequireComponent(typeof(Animator), typeof(NavMeshAgent))]
 public class NPCInteract : MonoBehaviour
 {
     [Header("Component")]
@@ -25,11 +26,15 @@ public class NPCInteract : MonoBehaviour
     public bool npcInteractionStarted = false;
     bool nPCInteractionDone = false;
     public int interactionMode = 0; //0 is player initiates interaction, 1 is NPC initiates interaction.
-    public AnimateCharacter animate;
 
-    
+    private static int ANIMATOR_PARAM_WALK_SPEED = 
+    	Animator.StringToHash("Speed");
+
+    private Animator _animator;    
+
+
     private void Start(){
-    
+        _animator = navMeshAgent.GetComponent<Animator>();
     }
 
     private void Update(){
@@ -106,7 +111,9 @@ public class NPCInteract : MonoBehaviour
     }
 
     public void WalkToPlayer(Vector3 destination){
+        _animator.SetFloat(ANIMATOR_PARAM_WALK_SPEED, 2);
         navMeshAgent.SetDestination(destination);
+        _animator.SetFloat(ANIMATOR_PARAM_WALK_SPEED, 0);
     }
 
     public IEnumerator Wait(){
