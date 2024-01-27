@@ -41,7 +41,7 @@ public class SpeechTimer : MonoBehaviour
         }
         else if(isOn){
             isOn = false;
-            npcInteract.interactionMode = 1;
+            npcInteract.meetingStage = 2;
             npcInteract.interactionStage = 0;
             npcInteract.npcInteractionStarted = true;
         }
