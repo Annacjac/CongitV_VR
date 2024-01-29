@@ -36,10 +36,10 @@ public class PauseMenuScript : MonoBehaviour
     {
         //initializing leftController
         UnityEngine.XR.InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
-
-        //Used to collect info on whether menu button on left controller is pressed during every update.
+        
+        //Used to collect info on whether primary button on left controller is pressed during every update.
         //Also used to check if pausePressed variable is true, indicating that the menu button was pressed.
-        if (leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.menuButton, out bool pausePressed) && pausePressed) PauseOrResumeMenuButton();
+        if (leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out bool pausePressed) && pausePressed) PauseOrResumeMenuButton();
     }
 
     /* 
@@ -76,12 +76,10 @@ public class PauseMenuScript : MonoBehaviour
     /* For when you use the ray on the right VR controller to press the "Resume" GUI button on the pause menu*/
     public void ResumeButton()
     {
-
     }
     /*Switches scene to the Main Menu scene when the game is paused and the player points their right VR controller's ray
       at the "Exit" menu button and clicks it.*/
     public void ExitButton()
     {
-
     }
 }
