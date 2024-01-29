@@ -13,7 +13,6 @@ public class NPCInteract : MonoBehaviour
     [Header("Component")]
     public TextMeshProUGUI interactText;
     public NavMeshAgent navMeshAgent;
-    public Meeting meeting;
     public Transform player;
     public Transform agent;
     Vector3 destination;
@@ -31,7 +30,6 @@ public class NPCInteract : MonoBehaviour
 
     
     private void Start(){
-    
     }
 
     private void Update(){
@@ -51,17 +49,8 @@ public class NPCInteract : MonoBehaviour
         }
 
         if(meetingStage == 1 && playerInteractionDone){
-            StartCoroutine(MeetingDialog(0)); //0
-            StartCoroutine(MeetingDialog(5)); //1
-            StartCoroutine(MeetingDialog(15)); //2
-            StartCoroutine(MeetingDialog(22)); //3
-            StartCoroutine(MeetingDialog(29)); //4
-            StartCoroutine(MeetingDialog(36)); //5
-            StartCoroutine(MeetingDialog(43)); //6
-            StartCoroutine(MeetingDialog(50)); //7
-            StartCoroutine(MeetingDialog(55)); //8
-            StartCoroutine(MeetingDialog(60)); //9
-            StartCoroutine(MeetingDialog(65));
+            StartCoroutine(MeetingDialog());
+            meetingStage = -1; 
         }
 
     }  
@@ -127,59 +116,50 @@ public class NPCInteract : MonoBehaviour
         navMeshAgent.SetDestination(destination);
     }
 
-    public IEnumerator Wait(){
+    IEnumerator MeetingDialog(){
+
+        interactText.text = "";
+        Debug.Log(interactText.text);
+        yield return new WaitForSeconds(5);
+
+        interactText.text = "Good morning, everyone, please find a seat and we'll get started.";
+        Debug.Log(interactText.text);
         yield return new WaitForSeconds(10);
-    }
+        
+        interactText.text = "Thank you for joining us today. If you don't know me, I am the head of HR. I wanted to briefly go over a new HR policy that was recently put into effect.";
+        Debug.Log(interactText.text);
+        yield return new WaitForSeconds(7);
 
-    IEnumerator MeetingDialog(int seconds){
-        yield return new WaitForSeconds(seconds);
-
-        if(meetingTextIndex == 0){
-            interactText.text = "";
-            meetingTextIndex++;
-        }
-        else if(meetingTextIndex == 1){
-            interactText.text = "Good morning, everyone, please find a seat and we'll get started.";
-            meetingTextIndex++;
-        }
-        else if(meetingTextIndex == 2){
-            interactText.text = "Thank you for joining us today. If you don't know me, I am the head of HR. I wanted to briefly go over a new HR policy that was recently put into effect.";
-            meetingTextIndex++;
-        }
-        else if(meetingTextIndex == 3){
-            interactText.text = "Recently we've noticed an increase in activities that waste company time, so effective today, we will begin monitoring work email activity and restricting internet use.";
-            meetingTextIndex++;
-        }
-        else if(meetingTextIndex == 4){
-            interactText.text = "Now, I know that might sound like an invasion of privacy, but that isn't the goal, and I'm sure you can understand where we're coming from.";
-            meetingTextIndex++;
-        }
-        else if(meetingTextIndex == 5){
-            interactText.text = "Our overall goal is to boost productivity and minimize distraction. We want to ensure that any non-work related emails only happen during breaks and outside of work hours.";
-            meetingTextIndex++;
-        }
-        else if(meetingTextIndex == 6){
-            interactText.text = "Regarding internet usage, we will be limiting the use of certain websites that could distract from work, such as shopping sites, games, social media, etcetra.";
-            meetingTextIndex++;
-        }
-        else if(meetingTextIndex == 7){
-            interactText.text = "I understand this might feel restrictive, but it's a move towards a more disciplined workspace. Your personal time and privacy outside work hours remain respected.";
-            meetingTextIndex++;
-        }
-        else if(meetingTextIndex == 8){
-            interactText.text = "Thank you all for your time and cooperation. If there are any questions, I will be happy to answer them at the conclusion of this meeting.";
-            meetingTextIndex++;
-        }
-        else if(meetingTextIndex == 9){
-            interactText.text = "Now we will hear a special presentation from our new employee!";
-            meetingTextIndex++;
-        }
-        else{
-            interactText.text = "";
-            meetingTextIndex = 0;
-            meetingStage = 2;
-        }
-
+        interactText.text = "Recently we've noticed an increase in activities that waste company time, so effective today, we will begin monitoring work email activity and restricting internet use.";
+        Debug.Log(interactText.text);
+        yield return new WaitForSeconds(7);    
+     
+        interactText.text = "Now, I know that might sound like an invasion of privacy, but that isn't the goal, and I'm sure you can understand where we're coming from.";
+        Debug.Log(interactText.text);
+        yield return new WaitForSeconds(7);    
+        
+        interactText.text = "Our overall goal is to boost productivity and minimize distraction. We want to ensure that any non-work related emails only happen during breaks and outside of work hours.";
+        Debug.Log(interactText.text);
+        yield return new WaitForSeconds(7);   
+        
+        interactText.text = "Regarding internet usage, we will be limiting the use of certain websites that could distract from work, such as shopping sites, games, social media, etcetra.";
+        Debug.Log(interactText.text);
+        yield return new WaitForSeconds(7);
+        
+        interactText.text = "I understand this might feel restrictive, but it's a move towards a more disciplined workspace. Your personal time and privacy outside work hours remain respected.";
+        Debug.Log(interactText.text);
+        yield return new WaitForSeconds(7);
+        
+        interactText.text = "Thank you all for your time and cooperation. If there are any questions, I will be happy to answer them at the conclusion of this meeting.";
+        Debug.Log(interactText.text);
+        yield return new WaitForSeconds(5);
+        
+        interactText.text = "Now we will hear a special presentation from our new employee!";
+        Debug.Log(interactText.text);
+        yield return new WaitForSeconds(5);
+        
+        interactText.text = "";
+        meetingStage = 2;
     }
     
 }

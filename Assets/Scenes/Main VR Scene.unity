@@ -306,13 +306,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactText: {fileID: 1600302739}
   navMeshAgent: {fileID: 2132494610}
-  meeting: {fileID: 0}
   player: {fileID: 1625854780}
   agent: {fileID: 2132494617}
   playerInteractionDone: 0
   interactionStage: 0
+  meetingTextIndex: 0
   npcInteractionStarted: 0
-  interactionMode: 0
+  meetingStage: 0
   animate: {fileID: 2132494627}
 --- !u!4 &36229664
 Transform:
@@ -8760,7 +8760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1447797248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8775,7 +8775,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meetingText: {fileID: 1600302739}
   npcInteract: {fileID: 36229663}
+  destination: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
   meetingDone: 0
+  meetingTextIndex: 0
 --- !u!4 &1447797249
 Transform:
   m_ObjectHideFlags: 0
