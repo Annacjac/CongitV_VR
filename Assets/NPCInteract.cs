@@ -12,9 +12,13 @@ public class NPCInteract : MonoBehaviour
 {
     [Header("Component")]
     public TextMeshProUGUI interactText;
-    public NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent1; //NPC that approaches player after speech
+    public NavMeshAgent navMeshAgent2; //NPC that gives HR policy presentation
     public Transform player;
     public Transform agent;
+    public Transform podiumStandSpot;
+    public Transform currentPosition;
+    public Transform podium;
     Vector3 destination;
     Animator anim;
 
@@ -38,12 +42,28 @@ public class NPCInteract : MonoBehaviour
             npcInteractionStarted = false;
         }
 
-        if (!navMeshAgent.pathPending){
-            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        if (!navMeshAgent1.pathPending){
+            if (navMeshAgent1.remainingDistance <= navMeshAgent1.stoppingDistance)
             {
-                if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
+                if (!navMeshAgent1.hasPath || navMeshAgent1.velocity.sqrMagnitude == 0f)
                 {
+                    RotateToTarget(player.position);
                     Dialog();
+                }
+            }
+        }
+
+        if (!navMeshAgent2.pathPending){
+            if (navMeshAgent2.remainingDistance <= navMeshAgent2.stoppingDistance)
+            {
+                if (!navMeshAgent2.hasPath || navMeshAgent2.velocity.sqrMagnitude == 0f)
+                {
+                    if(meetingStage == 1 && playerInteractionDone){
+                        RotateToTarget(podium.position);
+                    }
+                    else if(meetingStage == 2){
+                        RotateToTarget(player.position);
+                    }
                 }
             }
         }
@@ -63,7 +83,7 @@ public class NPCInteract : MonoBehaviour
     public void NPCInitiates(){
         destination = player.position;
         destination.z += 0.75f;
-        WalkToPlayer(destination);
+        WalkToDestination(navMeshAgent1, destination);
         interactionStage++;
     }
 
@@ -112,15 +132,26 @@ public class NPCInteract : MonoBehaviour
         SceneTransitionManager.singleton.GoToSceneAsync(3);
     }
 
-    public void WalkToPlayer(Vector3 destination){
-        navMeshAgent.SetDestination(destination);
+    public void WalkToDestination(NavMeshAgent nma, Vector3 destination){
+        nma.SetDestination(destination);
+        //RotateToTarget(target);
+    }
+
+    public void RotateToTarget(Vector3 target){
+        Vector3 direction = (target - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2);
     }
 
     IEnumerator MeetingDialog(){
 
+        Vector3 cp = currentPosition.position;
+        destination = podiumStandSpot.position;
+        WalkToDestination(navMeshAgent2, destination);
+
         interactText.text = "";
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(7);
 
         interactText.text = "Good morning, everyone, please find a seat and we'll get started.";
         Debug.Log(interactText.text);
@@ -160,6 +191,8 @@ public class NPCInteract : MonoBehaviour
         
         interactText.text = "";
         meetingStage = 2;
+
+        WalkToDestination(navMeshAgent2, cp);
     }
     
 }
