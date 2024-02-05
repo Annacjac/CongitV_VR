@@ -36,10 +36,22 @@ public class PauseMenuScript : MonoBehaviour
     {
         //initializing leftController
         UnityEngine.XR.InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
-        
+
         //Used to collect info on whether primary button on left controller is pressed during every update.
         //Also used to check if pausePressed variable is true, indicating that the menu button was pressed.
         if (leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out bool pausePressed) && pausePressed) PauseOrResumeMenuButton();
+
+        //when the game is currently paused
+        if (pauseMenuActive)
+        {
+            //initialize buttons
+            Button resuming = resumeButton.GetComponent<Button>();
+            Button exiting = exitButton.GetComponent<Button>();
+
+            //adding listener to reume and exit button
+            resuming.onClick.AddListener(ResumeFunc);//should
+            exiting.onClick.AddListener(ExitFunc);
+        }
     }
 
     /* 
@@ -73,13 +85,19 @@ public class PauseMenuScript : MonoBehaviour
         }
     }
 
-    /* For when you use the ray on the right VR controller to press the "Resume" GUI button on the pause menu*/
-    public void ResumeButton()
+    /* For when you use the ray on the VR controller to press the "Resume" GUI button on the pause menu*/
+    public void ResumeFunc()
     {
+        pauseMenu.SetActive(false); //disables the "PauseMenu" game object
+        pauseMenuActive = false; //changes value to reflect new current status of pause menu
+
+        //setting this to 1 allows the time in game to pass as fast as real time (basically unpauses the game).
+        Time.timeScale = 1;
     }
-    /*Switches scene to the Main Menu scene when the game is paused and the player points their right VR controller's ray
+    /*Switches scene to the Main Menu scene when the game is paused and the player points their VR controller's ray
       at the "Exit" menu button and clicks it.*/
-    public void ExitButton()
+    public void ExitFunc()
     {
+        SceneTransitionManager.singleton.GoToSceneAsync(0);
     }
 }
