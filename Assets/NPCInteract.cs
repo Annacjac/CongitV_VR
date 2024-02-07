@@ -136,42 +136,42 @@ public class NPCInteract : MonoBehaviour
         interactText.text = "Good morning, everyone, please find a seat and we'll get started.";
         AudioManager.instance.Play(hrSpeechPart1);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(7);
         
         interactText.text = "Thank you for joining us today. If you don't know me, I am the head of HR. I wanted to briefly go over a new HR policy that was recently put into effect.";
         AudioManager.instance.Play(hrSpeechPart2);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(10);
 
         interactText.text = "Recently we've noticed an increase in activities that waste company time, so effective today, we will begin monitoring work email activity and restricting internet use.";
         AudioManager.instance.Play(hrSpeechPart3);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(7);    
+        yield return new WaitForSeconds(10);    
 
         interactText.text = "Now, I know that might sound like an invasion of privacy, but that isn't the goal, and I'm sure you can understand where we're coming from.";
         AudioManager.instance.Play(hrSpeechPart4);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(7);    
+        yield return new WaitForSeconds(8);    
         
         interactText.text = "Our overall goal is to boost productivity and minimize distraction. We want to ensure that any non-work related emails only happen during breaks and outside of work hours.";
         AudioManager.instance.Play(hrSpeechPart5);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(7);   
+        yield return new WaitForSeconds(10);   
         
         interactText.text = "Regarding internet usage, we will be limiting the use of certain websites that could distract from work, such as shopping sites, games, social media, etcetra.";
         AudioManager.instance.Play(hrSpeechPart6);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(10);
         
         interactText.text = "I understand this might feel restrictive, but it's a move towards a more disciplined workspace. Your personal time and privacy outside work hours remain respected.";
         AudioManager.instance.Play(hrSpeechPart7);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(10);
         
         interactText.text = "Thank you all for your time and cooperation. If there are any questions, I will be happy to answer them at the conclusion of this meeting.";
         AudioManager.instance.Play(hrSpeechPart8);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(8);
         
         interactText.text = "Now we will hear a special presentation from our new employee!";
         AudioManager.instance.Play(hrSpeechPart9);
