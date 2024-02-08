@@ -134,6 +134,7 @@ public class NPCInteract : MonoBehaviour
         yield return new WaitForSeconds(5);
 
         interactText.text = "Good morning, everyone, please find a seat and we'll get started.";
+        sitInChairs();
         AudioManager.instance.Play(hrSpeechPart1);
         Debug.Log(interactText.text);
         yield return new WaitForSeconds(7);
@@ -180,6 +181,9 @@ public class NPCInteract : MonoBehaviour
         
         interactText.text = "";
         meetingStage = 2;
+
+        //Walks to a chair to watch player speech.
+        WalkToDestination(navMeshAgent2, chair1.position);
     }
     
 }
