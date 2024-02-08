@@ -12,9 +12,22 @@ public class NPCInteract : MonoBehaviour
 {
     [Header("Component")]
     public TextMeshProUGUI interactText;
-    public NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent1; //NPC that approaches player after speech
+    public NavMeshAgent navMeshAgent2; //NPC that gives HR policy presentation
+    public NavMeshAgent navMeshAgent3; //Other NPCs
+    public NavMeshAgent navMeshAgent4; //Other NPCs
+    public NavMeshAgent navMeshAgent5; //Other NPCs
     public Transform player;
     public Transform agent;
+    public Transform podiumStandSpot;
+    public Transform currentPosition;
+    public Transform podium;
+    public Transform chair1;
+    public Transform chair2;
+    public Transform chair3;
+    public Transform chair4;
+    public Transform chair5;
+    public Transform chair6;
     Vector3 destination;
     Animator anim;
     
@@ -44,17 +57,36 @@ public class NPCInteract : MonoBehaviour
     }
 
     private void Update(){
+        //Detects whether it's time for the after-speech NPC to approach the player.
         if(npcInteractionStarted && playerInteractionDone){
             NPCInitiates();
             npcInteractionStarted = false;
         }
 
-        if (!navMeshAgent.pathPending){
-            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        //Starts the actions of the after-speech NPC once the NPC stops walking.
+        if (!navMeshAgent1.pathPending){
+            if (navMeshAgent1.remainingDistance <= navMeshAgent1.stoppingDistance)
             {
-                if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
+                if (!navMeshAgent1.hasPath || navMeshAgent1.velocity.sqrMagnitude == 0f)
                 {
+                    RotateToTarget(player.position);
                     Dialog();
+                }
+            }
+        }
+
+        //Starts the actions of the HR Policy presenter after he stops walking.
+        if (!navMeshAgent2.pathPending){
+            if (navMeshAgent2.remainingDistance <= navMeshAgent2.stoppingDistance)
+            {
+                if (!navMeshAgent2.hasPath || navMeshAgent2.velocity.sqrMagnitude == 0f)
+                {
+                    if(meetingStage == 1 && playerInteractionDone){
+                        RotateToTarget(podium.position);
+                    }
+                    else if(meetingStage == 2){
+                        RotateToTarget(player.position);
+                    }
                 }
             }
         }
@@ -66,18 +98,24 @@ public class NPCInteract : MonoBehaviour
 
     }  
 
+    //Player interacts with any NPC and starts a conversation
     public void PlayerInitiates(){
         interactionStage++;
         Dialog();
     }
 
+    //NPC walks up to player after the player has given a speech
     public void NPCInitiates(){
         destination = player.position;
         destination.z += 0.75f;
-        WalkToPlayer(destination);
+        WalkToDestination(navMeshAgent1, destination);
         interactionStage++;
     }
 
+    //Manages the dialog depending on what meeting stage the player is in
+    //Stage 0: Player initiates conversation with an NPC
+    //Stage 1: NPC gives presentation on new HR policy
+    //Stage 2: NPC initiates with player after player has given the speech
     public void Dialog(){
         if(meetingStage == 0 && !playerInteractionDone){
             if(interactionStage == 1){
@@ -118,31 +156,52 @@ public class NPCInteract : MonoBehaviour
 
     }
 
+    //Changes the scene to the end screen
     public void EndGame(){
         Debug.Log("End game");
         SceneTransitionManager.singleton.GoToSceneAsync(3);
     }
 
-    public void WalkToPlayer(Vector3 destination){
-        navMeshAgent.SetDestination(destination);
+    //Takes a navMeshAgent and a position and sets the Agent's destination to that position,
+    //which triggers the Agent to begin moving towards that destination.
+    public void WalkToDestination(NavMeshAgent nma, Vector3 destination){
+        nma.SetDestination(destination);
     }
 
+    //Should be rotating the NavMeshAgent towards a target, but this is currently not working
+    public void RotateToTarget(Vector3 target){
+        Vector3 direction = (target - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2);
+    }
+
+    //Makes NPCs walk to a chair
+    public void sitInChairs(){
+        WalkToDestination(navMeshAgent1, chair2.position);
+        WalkToDestination(navMeshAgent3, chair4.position);
+        WalkToDestination(navMeshAgent4, chair5.position);
+    }
+
+    //First moves the HR presenter to the podium, then starts his speech.
+    //Text stays up for certain amount of time before the next text replaces it.
     IEnumerator MeetingDialog(){
+
+        Vector3 cp = currentPosition.position;
+        destination = podiumStandSpot.position;
+        WalkToDestination(navMeshAgent2, destination);
 
         interactText.text = "";
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
 
         interactText.text = "Good morning, everyone, please find a seat and we'll get started.";
         sitInChairs();
         AudioManager.instance.Play(hrSpeechPart1);
-
         Debug.Log(interactText.text);
         yield return new WaitForSeconds(7);
         
         interactText.text = "Thank you for joining us today. If you don't know me, I am the head of HR. I wanted to briefly go over a new HR policy that was recently put into effect.";
         AudioManager.instance.Play(hrSpeechPart2);
-
         Debug.Log(interactText.text);
         yield return new WaitForSeconds(10);
 
@@ -175,8 +234,6 @@ public class NPCInteract : MonoBehaviour
         AudioManager.instance.Play(hrSpeechPart8);
         Debug.Log(interactText.text);
         yield return new WaitForSeconds(8);
-
-        
         
         interactText.text = "Now we will hear a special presentation from our new employee!";
         AudioManager.instance.Play(hrSpeechPart9);
