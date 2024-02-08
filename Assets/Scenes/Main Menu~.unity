@@ -3357,7 +3357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickAudioName: uiclick
   hoverEnterAudioName: uihoverenter
-  hoverExitAudioName: 
+  hoverExitAudioName: uihoverexit
 --- !u!114 &1595845850
 MonoBehaviour:
   m_ObjectHideFlags: 0

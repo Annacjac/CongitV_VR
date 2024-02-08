@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.1341472, b: 0.121078566, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -310,9 +310,19 @@ MonoBehaviour:
   agent: {fileID: 2132494617}
   playerInteractionDone: 0
   interactionStage: 0
+  meetingTextIndex: 0
   npcInteractionStarted: 0
-  interactionMode: 0
+  meetingStage: 0
   animate: {fileID: 2132494627}
+  hrSpeechPart1: hr1
+  hrSpeechPart2: hr2
+  hrSpeechPart3: hr3
+  hrSpeechPart4: hr4
+  hrSpeechPart5: hr5
+  hrSpeechPart6: hr6
+  hrSpeechPart7: hr7
+  hrSpeechPart8: hr8
+  hrSpeechPart9: hr9
 --- !u!4 &36229664
 Transform:
   m_ObjectHideFlags: 0
@@ -10042,6 +10052,114 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 0
   m_Effectors: []
+--- !u!1 &1482792084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1482792086}
+  - component: {fileID: 1482792085}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1482792085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482792084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc44c5eb69748a45b697397b0740ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: hr1
+    clip: {fileID: 8300000, guid: f11e6747d35de40ed992d7439e310fd3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: hr2
+    clip: {fileID: 8300000, guid: b8bfbd56ed431462fbba0c260c33b117, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: hr3
+    clip: {fileID: 8300000, guid: 3cd216127d62741b594120b3f3d152a9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: hr4
+    clip: {fileID: 8300000, guid: da9d905ec463249528c663542e749ff8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: hr5
+    clip: {fileID: 8300000, guid: 76d833b7cd647407b8d661799f470ea4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: hr6
+    clip: {fileID: 8300000, guid: ceb1c4307782b43ffb245c9c89532752, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: hr7
+    clip: {fileID: 8300000, guid: 352465ff8eac34889862546196832993, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: hr8
+    clip: {fileID: 8300000, guid: d64ed53b058734aa3992b7f493b1c728, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: hr9
+    clip: {fileID: 8300000, guid: c5f4d9c71ade3415c9e49419155a264e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+--- !u!4 &1482792086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482792084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1494436151
 GameObject:
   m_ObjectHideFlags: 0
@@ -14494,3 +14612,4 @@ SceneRoots:
   - {fileID: 109977229}
   - {fileID: 3662928247608715138}
   - {fileID: 1741506097}
+  - {fileID: 1482792086}
