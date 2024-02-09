@@ -11909,19 +11909,18 @@ PrefabInstance:
     - target: {fileID: 2989645537583885593, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2989645537583885593, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2989645537583885593, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11500000, guid: cf4d06d37950bcd628cb9b359ab1da93,
-        type: 3}
+      objectReference: {fileID: 1741506096}
     - target: {fileID: 2989645537583885593, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -11930,12 +11929,12 @@ PrefabInstance:
     - target: {fileID: 2989645537583885593, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_name
+      value: ResumeFunc
       objectReference: {fileID: 0}
     - target: {fileID: 2989645537583885593, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: PauseMenuScript, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2989645537583885593, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
@@ -11975,7 +11974,7 @@ PrefabInstance:
     - target: {fileID: 5748746783912574922, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5748746783912574922, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
@@ -11986,8 +11985,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11500000, guid: cf4d06d37950bcd628cb9b359ab1da93,
-        type: 3}
+      objectReference: {fileID: 1741506096}
     - target: {fileID: 5748746783912574922, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -12001,17 +11999,17 @@ PrefabInstance:
     - target: {fileID: 5748746783912574922, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_name
+      value: ExitFunc
       objectReference: {fileID: 0}
     - target: {fileID: 5748746783912574922, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: PauseMenuScript, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5748746783912574922, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: ExitButton()
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5748746783912574922, guid: 28c06417afc3485de85a920de7ba0e4e,
         type: 3}
