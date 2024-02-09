@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu~.unity
     guid: d6851e70bba0f4570899a9cb262f5a66
   - enabled: 1
-    path: Assets/Scenes/Main VR Scene 1.unity
+    path: Assets/Scenes/Main VR Scene.unity
     guid: be6bcfd16c9cde846958b5ee440b70c6
   - enabled: 1
     path: Assets/Scenes/SAD Info Scene.unity
