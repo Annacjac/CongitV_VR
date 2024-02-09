@@ -42,6 +42,9 @@ public class NPCInteract : MonoBehaviour
     public AnimateCharacter animate;
 
     [Header("Audio")]
+    public string npcIntroduction;
+    public string npcDisagreePart1;
+    public string npcDisagreePart2;
     public string hrSpeechPart1;
     public string hrSpeechPart2;
     public string hrSpeechPart3;
@@ -123,6 +126,7 @@ public class NPCInteract : MonoBehaviour
             }
             else if(interactionStage == 2){
                 interactText.text = "NPC: Nice to meet you. The meeting is about to start!";
+                AudioManager.instance.Play(npcIntroduction);
             }
             else if(interactionStage == 3){
                 interactText.text = "";
@@ -136,12 +140,14 @@ public class NPCInteract : MonoBehaviour
         else if(meetingStage == 2 && !nPCInteractionDone && playerInteractionDone){
             if(interactionStage == 1){
                 interactText.text = "NPC: Hey, what did you think about that new HR policy?";
+                AudioManager.instance.Play(npcDisagreePart1);
             }
             else if(interactionStage == 2){
                 interactText.text = "Player shares their opinion.";
             }
             else if(interactionStage == 3){
                 interactText.text = "Hm, okay, interesting. I don't think I agree with that, but to each their own. See you later!";
+                AudioManager.instance.Play(npcDisagreePart2);
             }
             else if(interactionStage == 4){
                 interactText.text = "";
