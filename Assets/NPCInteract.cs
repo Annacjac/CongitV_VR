@@ -206,7 +206,7 @@ public class NPCInteract : MonoBehaviour
         Debug.Log(interactText.text);
         yield return new WaitForSeconds(7);
         
-        interactText.text = "Thank you for joining us today. If you don't know me, I am the head of HR. I wanted to briefly go over a new HR policy that was recently put into effect.";
+        /*interactText.text = "Thank you for joining us today. If you don't know me, I am the head of HR. I wanted to briefly go over a new HR policy that was recently put into effect.";
         AudioManager.instance.Play(hrSpeechPart2);
         Debug.Log(interactText.text);
         yield return new WaitForSeconds(10);
@@ -244,7 +244,7 @@ public class NPCInteract : MonoBehaviour
         interactText.text = "Now we will hear a special presentation from our new employee!";
         AudioManager.instance.Play(hrSpeechPart9);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(5);*/
         
         interactText.text = "";
         meetingStage = 2;
