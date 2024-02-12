@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.1341472, b: 0.121078566, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -280,9 +280,9 @@ MonoBehaviour:
   npcInteractionStarted: 0
   meetingStage: 0
   animate: {fileID: 0}
-  npcIntroduction: 
-  npcDisagreePart1: 
-  npcDisagreePart2: 
+  npcIntroduction: npc1
+  npcDisagreePart1: npc2
+  npcDisagreePart2: npc3
   hrSpeechPart1: hr1
   hrSpeechPart2: hr2
   hrSpeechPart3: hr3
@@ -9713,6 +9713,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - name: npc1
+    clip: {fileID: 8300000, guid: d117c96d39fd743b295c4d9d97694a84, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: npc2
+    clip: {fileID: 8300000, guid: 8738017dd5a3840aca3b1dc12e47726f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: npc3
+    clip: {fileID: 8300000, guid: 46dffd4f335bb4d33829669d82490db5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
   - name: hr1
     clip: {fileID: 8300000, guid: f11e6747d35de40ed992d7439e310fd3, type: 3}
     volume: 1
