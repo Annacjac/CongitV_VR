@@ -7,11 +7,13 @@ using TMPro;
 using UnityEngine.Scripting.APIUpdating;
 using System.Threading;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class NPCInteract : MonoBehaviour
 {
     [Header("Component")]
     public TextMeshProUGUI interactText;
+    public SpeechTimer speechTimer;
     public NavMeshAgent navMeshAgent1; //NPC that approaches player after speech
     public NavMeshAgent navMeshAgent2; //NPC that gives HR policy presentation
     public NavMeshAgent navMeshAgent3; //Other NPCs
@@ -34,10 +36,13 @@ public class NPCInteract : MonoBehaviour
 
     [Header("Interaction Settings")]
     public bool playerInteractionDone = false;
+    public bool hrPresentationStarted = false;
+    public bool hrPresentationDone = false;
     public int interactionStage = 0;
     public int meetingTextIndex = 0;
     public bool npcInteractionStarted = false;
     bool nPCInteractionDone = false;
+    bool chairReady = false;
     public int meetingStage = 0; //0 is player initiates interaction, 1 is NPC initiates interaction.
     public AnimateCharacter animate;
 
@@ -61,18 +66,16 @@ public class NPCInteract : MonoBehaviour
 
     private void Update(){
         //Detects whether it's time for the after-speech NPC to approach the player.
-        if(npcInteractionStarted && playerInteractionDone){
-            NPCInitiates();
-            npcInteractionStarted = false;
+        if(speechTimer.speechDone && !npcInteractionStarted){
+            StartCoroutine(NPCInitiates());
         }
 
         //Starts the actions of the after-speech NPC once the NPC stops walking.
-        if (!navMeshAgent1.pathPending){
+        if (!navMeshAgent1.pathPending && speechTimer.speechDone){
             if (navMeshAgent1.remainingDistance <= navMeshAgent1.stoppingDistance)
             {
                 if (!navMeshAgent1.hasPath || navMeshAgent1.velocity.sqrMagnitude == 0f)
                 {
-                    RotateToTarget(player.position);
                     Dialog();
                 }
             }
@@ -84,19 +87,25 @@ public class NPCInteract : MonoBehaviour
             {
                 if (!navMeshAgent2.hasPath || navMeshAgent2.velocity.sqrMagnitude == 0f)
                 {
-                    if(meetingStage == 1 && playerInteractionDone){
-                        RotateToTarget(podium.position);
-                    }
-                    else if(meetingStage == 2){
-                        RotateToTarget(player.position);
+                    if(meetingStage == 1 && playerInteractionDone && !hrPresentationDone){
+                        RotateToTarget(navMeshAgent2, podium.position);
                     }
                 }
             }
         }
 
-        if(meetingStage == 1 && playerInteractionDone){
+        if(meetingStage == 1 && playerInteractionDone && !hrPresentationStarted){
             StartCoroutine(MeetingDialog());
-            meetingStage = -1; 
+        }
+
+        if(chairReady){
+            sitInChairs(navMeshAgent1, chair2.position, chair5.position);
+            sitInChairs(navMeshAgent3, chair5.position, chair2.position);
+            sitInChairs(navMeshAgent4, chair4.position, chair1.position);
+        }
+
+        if(hrPresentationDone){
+            sitInChairs(navMeshAgent2, chair1.position, chair4.position);
         }
 
     }  
@@ -108,10 +117,14 @@ public class NPCInteract : MonoBehaviour
     }
 
     //NPC walks up to player after the player has given a speech
-    public void NPCInitiates(){
+    public IEnumerator NPCInitiates(){
+        Debug.Log("NPC initiates");
+        npcInteractionStarted = true;
         destination = player.position;
         destination.z += 0.75f;
         WalkToDestination(navMeshAgent1, destination);
+        yield return new WaitForSeconds(3);
+        AudioManager.instance.Play(npcDisagreePart1);
         interactionStage++;
     }
 
@@ -121,6 +134,7 @@ public class NPCInteract : MonoBehaviour
     //Stage 2: NPC initiates with player after player has given the speech
     public void Dialog(){
         if(meetingStage == 0 && !playerInteractionDone){
+            Debug.Log("Player Interaction");
             if(interactionStage == 1){
                 interactText.text = "Player is introducing themselves to NPC. Interact with NPC again for a response.";
             }
@@ -137,17 +151,18 @@ public class NPCInteract : MonoBehaviour
             //Debug.Log(interactText.text);
         }
         
-        else if(meetingStage == 2 && !nPCInteractionDone && playerInteractionDone){
+        else if(meetingStage == 2 && speechTimer.speechDone){
+            //Debug.Log(interactionStage);
+            RotateToTarget(navMeshAgent1, player.position);
             if(interactionStage == 1){
                 interactText.text = "NPC: Hey, what did you think about that new HR policy?";
-                AudioManager.instance.Play(npcDisagreePart1);
             }
             else if(interactionStage == 2){
                 interactText.text = "Player shares their opinion.";
+                AudioManager.instance.Play(npcDisagreePart2);
             }
             else if(interactionStage == 3){
                 interactText.text = "Hm, okay, interesting. I don't think I agree with that, but to each their own. See you later!";
-                AudioManager.instance.Play(npcDisagreePart2);
             }
             else if(interactionStage == 4){
                 interactText.text = "";
@@ -174,37 +189,40 @@ public class NPCInteract : MonoBehaviour
         nma.SetDestination(destination);
     }
 
-    //Should be rotating the NavMeshAgent towards a target, but this is currently not working
-    public void RotateToTarget(Vector3 target){
-        Vector3 direction = (target - transform.position).normalized;
+    //Rotates the agent towards a target
+    public void RotateToTarget(NavMeshAgent agent, Vector3 target){
+        Vector3 direction = (target - agent.transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2);
+        agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, lookRotation, Time.deltaTime * 2);
     }
 
+
     //Makes NPCs walk to a chair
-    public void sitInChairs(){
-        WalkToDestination(navMeshAgent1, chair2.position);
-        WalkToDestination(navMeshAgent3, chair4.position);
-        WalkToDestination(navMeshAgent4, chair5.position);
+    public void sitInChairs(NavMeshAgent npc, Vector3 chair, Vector3 target){
+        WalkToDestination(npc, chair);
+        RotateToTarget(npc, target);
     }
 
     //First moves the HR presenter to the podium, then starts his speech.
     //Text stays up for certain amount of time before the next text replaces it.
     IEnumerator MeetingDialog(){
 
+        hrPresentationStarted = true;
         Vector3 cp = currentPosition.position;
         destination = podiumStandSpot.position;
         WalkToDestination(navMeshAgent2, destination);
+        RotateToTarget(navMeshAgent2, podium.position);
 
         interactText.text = "";
         Debug.Log(interactText.text);
         yield return new WaitForSeconds(3);
-
+        chairReady = true;
         interactText.text = "Good morning, everyone, please find a seat and we'll get started.";
-        sitInChairs();
+
         AudioManager.instance.Play(hrSpeechPart1);
         Debug.Log(interactText.text);
         yield return new WaitForSeconds(7);
+        chairReady = false;
         
         /*interactText.text = "Thank you for joining us today. If you don't know me, I am the head of HR. I wanted to briefly go over a new HR policy that was recently put into effect.";
         AudioManager.instance.Play(hrSpeechPart2);
@@ -248,9 +266,12 @@ public class NPCInteract : MonoBehaviour
         
         interactText.text = "";
         meetingStage = 2;
+        hrPresentationDone = true;
 
         //Walks to a chair to watch player speech.
         WalkToDestination(navMeshAgent2, chair1.position);
+        RotateToTarget(navMeshAgent2, chair4.position);
     }
     
 }
+

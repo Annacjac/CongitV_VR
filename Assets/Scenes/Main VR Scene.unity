@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactText: {fileID: 1600302739}
+  speechTimer: {fileID: 115873457}
   navMeshAgent1: {fileID: 1322070931}
   navMeshAgent2: {fileID: 109977233}
   navMeshAgent3: {fileID: 1136352230}
@@ -275,14 +276,16 @@ MonoBehaviour:
   chair5: {fileID: 831491863}
   chair6: {fileID: 1170949701}
   playerInteractionDone: 0
+  hrPresentationStarted: 0
+  hrPresentationDone: 0
   interactionStage: 0
   meetingTextIndex: 0
   npcInteractionStarted: 0
   meetingStage: 0
   animate: {fileID: 0}
-  npcIntroduction: 
-  npcDisagreePart1: 
-  npcDisagreePart2: 
+  npcIntroduction: npc1
+  npcDisagreePart1: npc2
+  npcDisagreePart2: npc3
   hrSpeechPart1: hr1
   hrSpeechPart2: hr2
   hrSpeechPart3: hr3
@@ -2026,8 +2029,8 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -180
-    m_MaxLimit: 180
+    m_MinLimit: -85
+    m_MaxLimit: 85
     m_AimAxis: 4
     m_UpAxis: 2
     m_WorldUpType: 1
@@ -2037,7 +2040,7 @@ MonoBehaviour:
     m_ConstrainedAxes:
       x: 1
       y: 1
-      z: 1
+      z: 0
 --- !u!1 &224336173
 GameObject:
   m_ObjectHideFlags: 0
@@ -2842,8 +2845,8 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -180
-    m_MaxLimit: 180
+    m_MinLimit: -85
+    m_MaxLimit: 85
     m_AimAxis: 4
     m_UpAxis: 2
     m_WorldUpType: 1
@@ -2853,7 +2856,7 @@ MonoBehaviour:
     m_ConstrainedAxes:
       x: 1
       y: 1
-      z: 1
+      z: 0
 --- !u!1 &379415073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2928,8 +2931,8 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -180
-    m_MaxLimit: 180
+    m_MinLimit: -85
+    m_MaxLimit: 85
     m_AimAxis: 4
     m_UpAxis: 2
     m_WorldUpType: 1
@@ -2939,7 +2942,7 @@ MonoBehaviour:
     m_ConstrainedAxes:
       x: 1
       y: 1
-      z: 1
+      z: 0
 --- !u!1 &382571760
 GameObject:
   m_ObjectHideFlags: 0
@@ -5667,8 +5670,8 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -180
-    m_MaxLimit: 180
+    m_MinLimit: -85
+    m_MaxLimit: 85
     m_AimAxis: 4
     m_UpAxis: 2
     m_WorldUpType: 1
@@ -5678,7 +5681,7 @@ MonoBehaviour:
     m_ConstrainedAxes:
       x: 1
       y: 1
-      z: 1
+      z: 0
 --- !u!1 &909408258
 GameObject:
   m_ObjectHideFlags: 0
@@ -7242,7 +7245,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6ce2f540e7920c44b972df23a30dddf2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.626
+      value: -0.67
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ce2f540e7920c44b972df23a30dddf2,
         type: 3}
@@ -9776,6 +9779,27 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     source: {fileID: 0}
+  - name: npc1
+    clip: {fileID: 8300000, guid: d117c96d39fd743b295c4d9d97694a84, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: npc2
+    clip: {fileID: 8300000, guid: 8738017dd5a3840aca3b1dc12e47726f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: npc3
+    clip: {fileID: 8300000, guid: 46dffd4f335bb4d33829669d82490db5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
 --- !u!4 &1482792086
 Transform:
   m_ObjectHideFlags: 0
@@ -9951,8 +9975,8 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -180
-    m_MaxLimit: 180
+    m_MinLimit: -85
+    m_MaxLimit: 85
     m_AimAxis: 4
     m_UpAxis: 2
     m_WorldUpType: 1
@@ -9962,7 +9986,7 @@ MonoBehaviour:
     m_ConstrainedAxes:
       x: 1
       y: 1
-      z: 1
+      z: 0
 --- !u!1 &1558567272
 GameObject:
   m_ObjectHideFlags: 0
@@ -13556,8 +13580,8 @@ SceneRoots:
   - {fileID: 1136352227}
   - {fileID: 699005931}
   - {fileID: 1090588366}
+  - {fileID: 109977229}
   - {fileID: 36229664}
   - {fileID: 495929204}
-  - {fileID: 109977229}
   - {fileID: 1741506097}
   - {fileID: 1482792086}
