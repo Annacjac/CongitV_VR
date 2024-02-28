@@ -121,6 +121,7 @@ public class NPCInteract : MonoBehaviour
     //Stage 2: NPC initiates with player after player has given the speech
     public void Dialog(){
         if(meetingStage == 0 && !playerInteractionDone){
+            interactText.text = "Approach any NPC in the room and introduce yourself. Use the controller to interact when you're close enough to the NPC. Take a deep breath and remind yourself that it's okay to feel nervous. Focus on maintaining eye contact and speaking clearly.";
             if(interactionStage == 1){
                 interactText.text = "Player is introducing themselves to NPC. Interact with NPC again for a response.";
             }
@@ -129,7 +130,7 @@ public class NPCInteract : MonoBehaviour
                 AudioManager.instance.Play(npcIntroduction);
             }
             else if(interactionStage == 3){
-                interactText.text = "";
+                interactText.text = "Listen to the HR policy speech delivered by the NPC. Pay attention to the key points mentioned.";
                 interactionStage = 0;
                 playerInteractionDone = true;
                 meetingStage = 1;
@@ -138,6 +139,7 @@ public class NPCInteract : MonoBehaviour
         }
         
         else if(meetingStage == 2 && !nPCInteractionDone && playerInteractionDone){
+            interactText.text = "Engage with the NPC who approaches you and asks for your opinion on the HR policy. Respond honestly to their question. If you feel uncomfortable or anxious during the conversation, remember to stay grounded in your thoughts and opinions. It's okay to respectfully disagree.";
             if(interactionStage == 1){
                 interactText.text = "NPC: Hey, what did you think about that new HR policy?";
                 AudioManager.instance.Play(npcDisagreePart1);
@@ -196,9 +198,9 @@ public class NPCInteract : MonoBehaviour
         destination = podiumStandSpot.position;
         WalkToDestination(navMeshAgent2, destination);
 
-        interactText.text = "";
+        interactText.text = "Listen to the HR policy speech delivered by the NPC. Pay attention to the key points mentioned.";
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
 
         interactText.text = "Good morning, everyone, please find a seat and we'll get started.";
         sitInChairs();
@@ -239,18 +241,23 @@ public class NPCInteract : MonoBehaviour
         interactText.text = "Thank you all for your time and cooperation. If there are any questions, I will be happy to answer them at the conclusion of this meeting.";
         AudioManager.instance.Play(hrSpeechPart8);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(8);*/
         
         interactText.text = "Now we will hear a special presentation from our new employee!";
         AudioManager.instance.Play(hrSpeechPart9);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(5);*/
+        yield return new WaitForSeconds(5);
+
+        interactText.text =  "Approach the podium when you're ready to give your speech. Use the controller to interact with the podium to start your speech timer. Remember to take slow, deep breaths to help calm your nerves. Focus on the message you want to convey rather than worrying about being judged.";
+        yield return new WaitForSeconds(10);
         
         interactText.text = "";
         meetingStage = 2;
 
         //Walks to a chair to watch player speech.
         WalkToDestination(navMeshAgent2, chair1.position);
+
+        interactText.text = "Interact with the podium again when you are done.";
     }
     
 }
