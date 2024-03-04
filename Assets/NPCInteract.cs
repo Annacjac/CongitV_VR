@@ -62,6 +62,8 @@ public class NPCInteract : MonoBehaviour
 
     
     private void Start(){
+        interactText.text = "Approach any NPC in the room and introduce yourself. Use the controller to interact when you're close enough to the NPC. Take a deep breath and remind yourself that it's okay to feel nervous. Focus on maintaining eye contact and speaking clearly.";
+
     }
 
     private void Update(){
@@ -120,6 +122,8 @@ public class NPCInteract : MonoBehaviour
     public IEnumerator NPCInitiates(){
         Debug.Log("NPC initiates");
         npcInteractionStarted = true;
+        interactText.text = "Engage with the NPC who approaches you and asks for your opinion on the HR policy. Respond honestly to their question. If you feel uncomfortable or anxious during the conversation, remember to stay grounded in your thoughts and opinions. It's okay to respectfully disagree.";
+        yield return new WaitForSeconds(4);
         destination = player.position;
         destination.z += 0.75f;
         WalkToDestination(navMeshAgent1, destination);
@@ -137,7 +141,6 @@ public class NPCInteract : MonoBehaviour
 
             Debug.Log("Player Interaction");
 
-            interactText.text = "Approach any NPC in the room and introduce yourself. Use the controller to interact when you're close enough to the NPC. Take a deep breath and remind yourself that it's okay to feel nervous. Focus on maintaining eye contact and speaking clearly.";
 
             if(interactionStage == 1){
                 interactText.text = "Player is introducing themselves to NPC. Interact with NPC again for a response.";
@@ -159,7 +162,6 @@ public class NPCInteract : MonoBehaviour
         else if(meetingStage == 2 && speechTimer.speechDone){
             //Debug.Log(interactionStage);
             RotateToTarget(navMeshAgent1, player.position);
-            interactText.text = "Engage with the NPC who approaches you and asks for your opinion on the HR policy. Respond honestly to their question. If you feel uncomfortable or anxious during the conversation, remember to stay grounded in your thoughts and opinions. It's okay to respectfully disagree.";
 
             if(interactionStage == 1){
                 interactText.text = "NPC: Hey, what did you think about that new HR policy?";
@@ -193,6 +195,7 @@ public class NPCInteract : MonoBehaviour
     //Takes a navMeshAgent and a position and sets the Agent's destination to that position,
     //which triggers the Agent to begin moving towards that destination.
     public void WalkToDestination(NavMeshAgent nma, Vector3 destination){
+        nma.speed = (float)1.5;
         nma.SetDestination(destination);
     }
 
@@ -278,13 +281,14 @@ public class NPCInteract : MonoBehaviour
         WalkToDestination(navMeshAgent2, chair1.position);
         RotateToTarget(navMeshAgent2, chair4.position);
 
-        interactText.text =  "Approach the podium when you're ready to give your speech. Use the controller to interact with the podium to start your speech timer. Remember to take slow, deep breaths to help calm your nerves. Focus on the message you want to convey rather than worrying about being judged.";
-        yield return new WaitForSeconds(10);
-        
         interactText.text = "";
         meetingStage = 2;
         hrPresentationDone = true;
 
+
+        interactText.text =  "Approach the podium when you're ready to give your speech. Use the controller to interact with the podium to start your speech timer. Remember to take slow, deep breaths to help calm your nerves. Focus on the message you want to convey rather than worrying about being judged.";
+        yield return new WaitForSeconds(10);
+        
         interactText.text = "Interact with the podium again when you are done.";
 
     }
