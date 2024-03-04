@@ -12,8 +12,8 @@ public class SpeechTimer : MonoBehaviour
     [Header ("Timer Settings")]
     public bool isOn = false;
     public float currentTime;
-    public bool speechStarted;
-    public bool speechDone;
+    public bool speechStarted = false;
+    public bool speechDone = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,18 +32,19 @@ public class SpeechTimer : MonoBehaviour
             currentTime = 0;
             timerText.text = "";
         }
+
     }
 
     public void ToggleTimer(){
-        if(!speechDone && !isOn && npcInteract.playerInteractionDone){
+        if(!speechDone && !isOn && npcInteract.playerInteractionDone && npcInteract.hrPresentationDone){
             isOn = true;
-            speechDone = true;
+            speechStarted = true;
         }
-        else if(isOn){
+        else if(isOn && speechStarted){
             isOn = false;
             npcInteract.meetingStage = 2;
             npcInteract.interactionStage = 0;
-            npcInteract.npcInteractionStarted = true;
+            speechDone = true;
         }
     }
 }
