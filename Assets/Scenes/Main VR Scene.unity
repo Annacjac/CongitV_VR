@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.1341472, b: 0.121078566, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -587,6 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rig: {fileID: 805667013}
+  st: {fileID: 115873457}
 --- !u!114 &109977235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4383,7 +4384,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 098e05b3de1230a4faafc4b97b12af4c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.263
+      value: -3.3271894
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 098e05b3de1230a4faafc4b97b12af4c,
         type: 3}
@@ -4393,7 +4394,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 098e05b3de1230a4faafc4b97b12af4c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.075
+      value: 3.7830977
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 098e05b3de1230a4faafc4b97b12af4c,
         type: 3}
@@ -4538,6 +4539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rig: {fileID: 1000323762}
+  st: {fileID: 115873457}
 --- !u!114 &699005936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7405,6 +7407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rig: {fileID: 1175314065}
+  st: {fileID: 115873457}
 --- !u!114 &1090588371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7670,7 +7673,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7cb207719933bb849bb5f3c862c91376,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.4948106
+      value: -2.559
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7cb207719933bb849bb5f3c862c91376,
         type: 3}
@@ -7680,7 +7683,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7cb207719933bb849bb5f3c862c91376,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.0219023
+      value: 3.73
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7cb207719933bb849bb5f3c862c91376,
         type: 3}
@@ -7825,6 +7828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rig: {fileID: 1032557912}
+  st: {fileID: 115873457}
 --- !u!114 &1136352232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8946,6 +8950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rig: {fileID: 1441282820}
+  st: {fileID: 115873457}
 --- !u!114 &1322070933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12394,7 +12399,7 @@ Transform:
   m_GameObject: {fileID: 2040816051}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.31196433, z: -0, w: 0.95009387}
-  m_LocalPosition: {x: -5.654, y: 0, z: -1.329}
+  m_LocalPosition: {x: -5.666, y: 0, z: -1.329}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []

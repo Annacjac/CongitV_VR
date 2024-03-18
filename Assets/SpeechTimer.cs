@@ -39,12 +39,14 @@ public class SpeechTimer : MonoBehaviour
         if(!speechDone && !isOn && npcInteract.playerInteractionDone && npcInteract.hrPresentationDone){
             isOn = true;
             speechStarted = true;
+            npcInteract.interactText.text = "Interact with the podium again when you are done.";
         }
         else if(isOn && speechStarted){
             isOn = false;
             npcInteract.meetingStage = 2;
             npcInteract.interactionStage = 0;
             speechDone = true;
+            npcInteract.interactText.text = "";
         }
     }
 }

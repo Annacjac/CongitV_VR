@@ -287,9 +287,7 @@ public class NPCInteract : MonoBehaviour
 
 
         interactText.text =  "Approach the podium when you're ready to give your speech. Use the controller to interact with the podium to start your speech timer. Remember to take slow, deep breaths to help calm your nerves. Focus on the message you want to convey rather than worrying about being judged.";
-        yield return new WaitForSeconds(10);
-        
-        interactText.text = "Interact with the podium again when you are done.";
+       
 
     }
     

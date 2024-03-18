@@ -7,9 +7,9 @@ using TMPro;
 public class SpeechHeadTracking : MonoBehaviour
 {
     public Rig rig;
-    // Start is called before the first frame update
+    public SpeechTimer st;
     private float time = 0;
-    private float tp = 5;
+    //private float tp = 5;
     private bool isOn = false;
     void Start()
     {
@@ -19,7 +19,7 @@ public class SpeechHeadTracking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if(isOn){
+         if(isOn && !st.speechDone){
                 rig.weight=1;
             }
             else{
@@ -29,7 +29,7 @@ public class SpeechHeadTracking : MonoBehaviour
     }
 
     public void ToggleWeight(){
-        if(!isOn){
+        if(!isOn && st.speechStarted){
             isOn = true;
         }
         else if(isOn){
