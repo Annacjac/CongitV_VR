@@ -62,8 +62,8 @@ public class NPCInteract : MonoBehaviour
 
     
     private void Start(){
-        interactText.text = "Approach any NPC in the room and introduce yourself. Use the controller to interact when you're close enough to the NPC. Take a deep breath and remind yourself that it's okay to feel nervous. Focus on maintaining eye contact and speaking clearly.";
-
+        interactText.text = "Use the joystick on either controller to move towards the door and enter the meeting room.";
+        //Use the joystick on either controller to move towards the door and enter the meeting room.
     }
 
     private void Update(){
@@ -289,6 +289,11 @@ public class NPCInteract : MonoBehaviour
         interactText.text =  "Approach the podium when you're ready to give your speech. Use the controller to interact with the podium to start your speech timer. Remember to take slow, deep breaths to help calm your nerves. Focus on the message you want to convey rather than worrying about being judged.";
        
 
+    }
+
+    public void OpenDoor(){
+        Debug.Log("Working");
+        interactText.text = "Approach any NPC in the room and introduce yourself. Use the trigger button under your middle finger to interact when you're close enough to the NPC. Take a deep breath and remind yourself that it's okay to feel nervous. Focus on maintaining eye contact and speaking clearly.";
     }
     
 }

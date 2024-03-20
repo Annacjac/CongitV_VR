@@ -23,7 +23,6 @@ public class PauseMenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pauseMenu = GameObject.Find("PauseMenu");
         pauseMenu.SetActive(false);
         //pauseMenu.SetActive(true);
 
@@ -81,5 +80,6 @@ public class PauseMenuScript : MonoBehaviour
       at the "Exit" menu button and clicks it.*/
     public void ExitButton()
     {
+        SceneTransitionManager.singleton.GoToSceneAsync(0);
     }
 }
