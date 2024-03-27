@@ -14,11 +14,16 @@ public class NPCInteract : MonoBehaviour
     [Header("Component")]
     public TextMeshProUGUI interactText;
     public SpeechTimer speechTimer;
-    public NavMeshAgent navMeshAgent1; //NPC that approaches player after speech
-    public NavMeshAgent navMeshAgent2; //NPC that gives HR policy presentation
+    public NavMeshAgent navMeshAgent1; //Louise NPC
+    public NavMeshAgent navMeshAgent2; //Joe NPC
     public NavMeshAgent navMeshAgent3; //Other NPCs
     public NavMeshAgent navMeshAgent4; //Other NPCs
     public NavMeshAgent navMeshAgent5; //Other NPCs
+    public Animator Joe;  
+    public Animator Kate; 
+    public Animator Louise; 
+    public Animator Leonard; 
+
     public Transform player;
     public Transform agent;
     public Transform podiumStandSpot;
@@ -63,7 +68,10 @@ public class NPCInteract : MonoBehaviour
     
     private void Start(){
         interactText.text = "Approach any NPC in the room and introduce yourself. Use the controller to interact when you're close enough to the NPC. Take a deep breath and remind yourself that it's okay to feel nervous. Focus on maintaining eye contact and speaking clearly.";
-
+         Joe = navMeshAgent2.GetComponent<Animator>();
+         Kate = navMeshAgent1.GetComponent<Animator>();
+         Louise = navMeshAgent3.GetComponent<Animator>();
+         Leonard = navMeshAgent4.GetComponent<Animator>();
     }
 
     private void Update(){
@@ -78,6 +86,7 @@ public class NPCInteract : MonoBehaviour
             {
                 if (!navMeshAgent1.hasPath || navMeshAgent1.velocity.sqrMagnitude == 0f)
                 {
+                    Kate.SetBool("isWalking",false); //Stops the walking animation
                     Dialog();
                 }
             }
@@ -90,6 +99,7 @@ public class NPCInteract : MonoBehaviour
                 if (!navMeshAgent2.hasPath || navMeshAgent2.velocity.sqrMagnitude == 0f)
                 {
                     if(meetingStage == 1 && playerInteractionDone && !hrPresentationDone){
+                        Joe.SetBool("isWalking", false); //Stops the walking animation
                         RotateToTarget(navMeshAgent2, podium.position);
                     }
                 }
@@ -101,13 +111,25 @@ public class NPCInteract : MonoBehaviour
         }
 
         if(chairReady){
-            sitInChairs(navMeshAgent1, chair2.position, chair5.position);
-            sitInChairs(navMeshAgent3, chair5.position, chair2.position);
-            sitInChairs(navMeshAgent4, chair4.position, chair1.position);
+            sitInChairs(navMeshAgent1, chair2.position, chair5.position, Kate);
+            //Stops Kate from moving after reaching their chair
+            if (!navMeshAgent1.hasPath || navMeshAgent1.velocity.sqrMagnitude == 0f){
+            Kate.SetBool("isWalking", false); 
+            }
+            sitInChairs(navMeshAgent3, chair5.position, chair2.position, Louise);
+            //Stops Louise from moving after reaching their chair
+            if (!navMeshAgent3.hasPath || navMeshAgent3.velocity.sqrMagnitude == 0f){
+            Louise.SetBool("isWalking", false); 
+            }
+            sitInChairs(navMeshAgent4, chair4.position, chair1.position, Leonard);
+            //Stops leonard from moving after reaching their chair
+            if (!navMeshAgent4.hasPath || navMeshAgent4.velocity.sqrMagnitude == 0f){
+            Leonard.SetBool("isWalking", false); 
+            } 
         }
 
         if(hrPresentationDone){
-            sitInChairs(navMeshAgent2, chair1.position, chair4.position);
+            sitInChairs(navMeshAgent2, chair1.position, chair4.position, Joe);
         }
 
     }  
@@ -126,8 +148,9 @@ public class NPCInteract : MonoBehaviour
         yield return new WaitForSeconds(4);
         destination = player.position;
         destination.z += 0.75f;
-        WalkToDestination(navMeshAgent1, destination);
+        WalkToDestination(navMeshAgent1, destination,Kate);
         yield return new WaitForSeconds(3);
+        Kate.SetBool("isWalking", false); //Stops the walking animation
         AudioManager.instance.Play(npcDisagreePart1);
         interactionStage++;
     }
@@ -194,9 +217,15 @@ public class NPCInteract : MonoBehaviour
 
     //Takes a navMeshAgent and a position and sets the Agent's destination to that position,
     //which triggers the Agent to begin moving towards that destination.
-    public void WalkToDestination(NavMeshAgent nma, Vector3 destination){
+    public void WalkToDestination(NavMeshAgent nma, Vector3 destination, Animator anims){
+        if(anims != null)
+        {
+            Debug.Log("Walking");
+            anims.SetBool("isWalking", true);
+        }
         nma.speed = (float)1.5;
         nma.SetDestination(destination);
+        
     }
 
     //Rotates the agent towards a target
@@ -208,8 +237,8 @@ public class NPCInteract : MonoBehaviour
 
 
     //Makes NPCs walk to a chair
-    public void sitInChairs(NavMeshAgent npc, Vector3 chair, Vector3 target){
-        WalkToDestination(npc, chair);
+    public void sitInChairs(NavMeshAgent npc, Vector3 chair, Vector3 target, Animator anims){
+        WalkToDestination(npc, chair, anims);
         RotateToTarget(npc, target);
     }
 
@@ -220,7 +249,7 @@ public class NPCInteract : MonoBehaviour
         hrPresentationStarted = true;
         Vector3 cp = currentPosition.position;
         destination = podiumStandSpot.position;
-        WalkToDestination(navMeshAgent2, destination);
+        WalkToDestination(navMeshAgent2, destination, Joe);
         RotateToTarget(navMeshAgent2, podium.position);
 
         interactText.text = "Listen to the HR policy speech delivered by the NPC. Pay attention to the key points mentioned.";
@@ -278,8 +307,11 @@ public class NPCInteract : MonoBehaviour
         yield return new WaitForSeconds(5);
         
         //Walks to a chair to watch player speech.
-        WalkToDestination(navMeshAgent2, chair1.position);
+        WalkToDestination(navMeshAgent2, chair1.position, Joe);
         RotateToTarget(navMeshAgent2, chair4.position);
+        if (!navMeshAgent2.hasPath || navMeshAgent2.velocity.sqrMagnitude == 0f){
+            Joe.SetBool("isWalking", false); 
+            } 
 
         interactText.text = "";
         meetingStage = 2;
