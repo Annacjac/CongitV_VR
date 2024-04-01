@@ -62,7 +62,7 @@ public class NPCInteract : MonoBehaviour
 
     
     private void Start(){
-        interactText.text = "Use the joystick on either controller to move towards the door and enter the meeting room.";
+        interactText.text = "Use the joystick on either controller to move towards the door and enter the meeting room. Then approach any NPC in the room and introduce yourself. Use the trigger button under your right middle finger to interact when you're close enough to the NPC. Take a deep breath and remind yourself that it's okay to feel nervous. Focus on maintaining eye contact and speaking clearly.";
         //Use the joystick on either controller to move towards the door and enter the meeting room.
     }
 
@@ -122,7 +122,7 @@ public class NPCInteract : MonoBehaviour
     public IEnumerator NPCInitiates(){
         Debug.Log("NPC initiates");
         npcInteractionStarted = true;
-        interactText.text = "Engage with the NPC who approaches you and asks for your opinion on the HR policy. Respond honestly to their question. If you feel uncomfortable or anxious during the conversation, remember to stay grounded in your thoughts and opinions. It's okay to respectfully disagree.";
+        interactText.text = "Engage with the NPC who approaches you and asks for your opinion on the HR policy. Respond honestly to their question. If you feel uncomfortable or anxious during the conversation, remember to stay grounded in your thoughts and opinions. It's okay to respectfully disagree. Interact with the NPC to end the conversation.";
         yield return new WaitForSeconds(4);
         destination = player.position;
         destination.z += 0.75f;
@@ -167,20 +167,14 @@ public class NPCInteract : MonoBehaviour
                 interactText.text = "NPC: Hey, what did you think about that new HR policy?";
             }
             else if(interactionStage == 2){
-                interactText.text = "Player shares their opinion.";
-                AudioManager.instance.Play(npcDisagreePart2);
-            }
-            else if(interactionStage == 3){
-                interactText.text = "Hm, okay, interesting. I don't think I agree with that, but to each their own. See you later!";
-            }
-            else if(interactionStage == 4){
                 interactText.text = "";
                 interactionStage = 0;
                 nPCInteractionDone = true;
                 //Debug.Log("End Game");
                 EndGame();
-
             }
+
+            
             //Debug.Log(interactText.text);
         }
 
@@ -237,7 +231,7 @@ public class NPCInteract : MonoBehaviour
         yield return new WaitForSeconds(7);
         chairReady = false;
         
-        /*interactText.text = "Thank you for joining us today. If you don't know me, I am the head of HR. I wanted to briefly go over a new HR policy that was recently put into effect.";
+        interactText.text = "Thank you for joining us today. If you don't know me, I am the head of HR. I wanted to briefly go over a new HR policy that was recently put into effect.";
         AudioManager.instance.Play(hrSpeechPart2);
         Debug.Log(interactText.text);
         yield return new WaitForSeconds(10);
@@ -270,7 +264,7 @@ public class NPCInteract : MonoBehaviour
         interactText.text = "Thank you all for your time and cooperation. If there are any questions, I will be happy to answer them at the conclusion of this meeting.";
         AudioManager.instance.Play(hrSpeechPart8);
         Debug.Log(interactText.text);
-        yield return new WaitForSeconds(8);*/
+        yield return new WaitForSeconds(8);
         
         interactText.text = "Now we will hear a special presentation from our new employee!";
         AudioManager.instance.Play(hrSpeechPart9);
@@ -289,11 +283,6 @@ public class NPCInteract : MonoBehaviour
         interactText.text =  "Approach the podium when you're ready to give your speech. Use the controller to interact with the podium to start your speech timer. Remember to take slow, deep breaths to help calm your nerves. Focus on the message you want to convey rather than worrying about being judged.";
        
 
-    }
-
-    public void OpenDoor(){
-        Debug.Log("Working");
-        interactText.text = "Approach any NPC in the room and introduce yourself. Use the trigger button under your middle finger to interact when you're close enough to the NPC. Take a deep breath and remind yourself that it's okay to feel nervous. Focus on maintaining eye contact and speaking clearly.";
     }
     
 }
