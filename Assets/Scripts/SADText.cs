@@ -49,6 +49,7 @@ public class SADText : MonoBehaviour
             prevButton.gameObject.SetActive(true);
         }
         else if(page == 2){
+
             text.text = "How to Practice Box Breathing:\n" +
             "1. Find a Quiet Space: Choose a quiet environment where you can comfortably sit or stand.\n"+
             "2. Sit or Stand Comfortably: Adopt a comfortable posture with your back straight and shoulders relaxed.\n"+
