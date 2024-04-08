@@ -68,12 +68,12 @@ public class NPCInteract : MonoBehaviour
     
     private void Start(){
 
-        interactText.text = "Use the joystick on the left controller to move towards the door and enter the meeting room. Then approach any NPC in the room and introduce yourself. Use the trigger button under your right middle finger to interact when you're close enough to the NPC. Take a deep breath and remind yourself that it's okay to feel nervous. Focus on maintaining eye contact and speaking clearly.";
+        interactText.text = "Use the Left Joystick to navigate. Use the Right Trigger to interact. Navigate into the room (Left Joystick), interact with a character (Right Trigger), and introduce yourself to them. Take a slow, deep breath and know it's okay to feel nervous. Focus on maintaining eye contact and speaking clearly. Now, go say “Hi” and introduce yourself to someone…You’ve got this!";
 
-         Joe = navMeshAgent2.GetComponent<Animator>();
-         Kate = navMeshAgent1.GetComponent<Animator>();
-         Louise = navMeshAgent3.GetComponent<Animator>();
-         Leonard = navMeshAgent4.GetComponent<Animator>();
+        Joe = navMeshAgent2.GetComponent<Animator>();
+        Kate = navMeshAgent1.GetComponent<Animator>();
+        Louise = navMeshAgent3.GetComponent<Animator>();
+        Leonard = navMeshAgent4.GetComponent<Animator>();
 
         //Use the joystick on either controller to move towards the door and enter the meeting room.
     }
@@ -148,8 +148,8 @@ public class NPCInteract : MonoBehaviour
     public IEnumerator NPCInitiates(){
         Debug.Log("NPC initiates");
         npcInteractionStarted = true;
-        interactText.text = "Engage with the NPC who approaches you and asks for your opinion on the HR policy. Respond honestly to their question. If you feel uncomfortable or anxious during the conversation, remember to stay grounded in your thoughts and opinions. It's okay to respectfully disagree. Interact with the NPC to end the conversation.";
-        yield return new WaitForSeconds(4);
+        interactText.text = "Interact audibly (Hold A Button & speak) with the character who approaches you and asks for your opinion. Respond honestly to their questions. State your opinion respectfully. It’s ok to disagree. Take a minute to appreciate yourself. Your thoughts and opinions are valid and matter.";
+        yield return new WaitForSeconds(15);
         destination = player.position;
         destination.z += 0.75f;
         WalkToDestination(navMeshAgent1, destination,Kate);
@@ -170,14 +170,14 @@ public class NPCInteract : MonoBehaviour
 
 
             if(interactionStage == 1){
-                interactText.text = "Player is introducing themselves to NPC. Interact with NPC again for a response.";
+                interactText.text = "Interact (Right Trigger) with the character again for a response.";
             }
             else if(interactionStage == 2){
                 interactText.text = "NPC: Nice to meet you. The meeting is about to start!";
                 AudioManager.instance.Play(npcIntroduction);
             }
             else if(interactionStage == 3){
-                interactText.text = "Listen to the HR policy speech delivered by the NPC. Pay attention to the key points mentioned.";
+                interactText.text = "Listen to the speech delivered by the presenter. Pay attention to the key points.";
                 interactionStage = 0;
                 playerInteractionDone = true;
                 meetingStage = 1;
@@ -250,7 +250,7 @@ public class NPCInteract : MonoBehaviour
         WalkToDestination(navMeshAgent2, destination, Joe);
         RotateToTarget(navMeshAgent2, podium.position);
 
-        interactText.text = "Listen to the HR policy speech delivered by the NPC. Pay attention to the key points mentioned.";
+        interactText.text = "Listen to the speech delivered by the presenter. Pay attention to the key points.";
         Debug.Log(interactText.text);
 
         yield return new WaitForSeconds(3);
@@ -316,8 +316,7 @@ public class NPCInteract : MonoBehaviour
         hrPresentationDone = true;
 
 
-        interactText.text =  "Approach the podium when you're ready to give your speech. Use the controller to interact with the podium to start your speech timer. Remember to take slow, deep breaths to help calm your nerves. Focus on the message you want to convey rather than worrying about being judged.";
-       
+        interactText.text = "Approach the podium to introduce yourself. Interact with the podium (Right Trigger) to start and stop your speech timer. Say hello, tell everyone your name, what your current job title is, and what you do in your job. Try to talk for 90 seconds or more. End your speech by thanking the audience for their attention and telling them you are happy to be there. Take your time. Take slow, deep breaths in (count to 4) and out (count to 6). Focus on the message you want to convey rather than other people.";
 
     }
     
