@@ -39,7 +39,7 @@ public class SpeechTimer : MonoBehaviour
         if(!speechDone && !isOn && npcInteract.playerInteractionDone && npcInteract.hrPresentationDone){
             isOn = true;
             speechStarted = true;
-            npcInteract.interactText.text = "Interact with the podium again when you are done.";
+            npcInteract.interactText.text = "Say hello, tell everyone your name, job title, and what you do in your job. Try to talk for at least 90 seconds, and end the speech by thanking the audience.\nTake your time. Take slow, deep breaths in (count to 4) and out (count to 6). Focus on the message you want to convey rather than other people.";
         }
         else if(isOn && speechStarted){
             isOn = false;

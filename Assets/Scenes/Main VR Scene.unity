@@ -491,6 +491,10 @@ MonoBehaviour:
   navMeshAgent3: {fileID: 1136352230}
   navMeshAgent4: {fileID: 699005934}
   navMeshAgent5: {fileID: 1090588369}
+  Joe: {fileID: 0}
+  Kate: {fileID: 0}
+  Louise: {fileID: 0}
+  Leonard: {fileID: 0}
   player: {fileID: 1625854780}
   agent: {fileID: 0}
   podiumStandSpot: {fileID: 1303370604}
