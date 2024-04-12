@@ -181,7 +181,7 @@ public class NPCInteract : MonoBehaviour
                 interactText.text = "Interact (Right Trigger) with the character again for a response.";
             }
             else if(interactionStage == 2){
-                interactText.text = "Collegue: Nice to meet you. The meeting is about to start!\nInteract (Right Trigger) again to continue.";
+                interactText.text = "Colleague: Nice to meet you. The meeting is about to start!\nInteract (Right Trigger) again to continue.";
                 AudioManager.instance.Play(npcIntroduction);
             }
             else if(interactionStage == 3){
@@ -199,7 +199,7 @@ public class NPCInteract : MonoBehaviour
             RotateToTarget(navMeshAgent1, player.position);
 
             if(interactionStage == 1){
-                interactText.text = "Collegue: Hey, what did you think about that new HR policy?";
+                interactText.text = "Colleague: Hey, what did you think about that new HR policy?";
             }
             else if(interactionStage == 2){
                 interactText.text = "";
