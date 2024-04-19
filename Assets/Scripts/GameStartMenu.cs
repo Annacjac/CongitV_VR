@@ -43,6 +43,7 @@ public class GameStartMenu : MonoBehaviour
     {
         HideAll();
         SceneTransitionManager.singleton.GoToSceneAsync(1);
+        Debug.Log("Pressed");
     }
 
     public void GoToAbout()
