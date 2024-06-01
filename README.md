@@ -17,4 +17,4 @@ Unfortunately, we had significant issues while building this game as a standalon
 1. Download the github repo zip and extract it to your desired location on your PC.
 2. Download and install the Oculus/Meta PC app, then setup your headset. Instructions and download link here: https://www.meta.com/help/quest/articles/headsets-and-accessories/oculus-rift-s/install-app-for-link/
 3. Connect your headset to your PC via Quest Link. It is recommended to use a quest cable for faster performance, but it is also possible to use Air Link. Instructions here: https://www.meta.com/help/quest/articles/headsets-and-accessories/oculus-link/set-up-link/
-4. Run the exe file in the extracted zip, and it should run the game in your headset.
+4. Run the "CognitV Solutions VR Exposure Therapy" exe file in the extracted zip, and it should run the game in your headset.
