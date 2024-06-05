@@ -12,6 +12,8 @@ One of the key challenges we faced was seamlessly integrating AI within Unity to
 
 In terms of game progression, players immerse themselves in a professional setting, engaging in tasks like introducing themselves to NPCs, listening to speeches, and delivering presentations. Interactions with AI-driven NPCs provide dynamic conversational experiences, culminating in open-ended discussions about HR policies, reflecting real-world social scenarios.
 
+A demo video and presentation on this project can be found in this repository.
+
 # Download and Installation
 Unfortunately, we had significant issues while building this game as a standalone app for the Quest, so the only way to play this game is via Quest Link to a PC.
 1. Download the github repo zip and extract it to your desired location on your PC.
